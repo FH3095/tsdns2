@@ -1,4 +1,0 @@
-Dez 12, 2011 2:40:33 AM de.my_freaks.ts3.tsdns2.Main run
-Information: Startup.
-Dez 12, 2011 2:40:33 AM de.my_freaks.ts3.tsdns2.Main run
-Information: Initialized.
