@@ -32,6 +32,11 @@ public class LookupThread implements Runnable {
 			}
 			String domain = new String(inData).trim();
 			if (!Main.getConfig().isDomainAllowed(domain)) {
+				if (LOGGER.isLoggable(Level.FINE)) {
+					LOGGER.log(Level.FINE, sock.getInetAddress()
+							.getHostAddress()
+							+ " tried to lookup not allowed domain: " + domain);
+				}
 				return;
 			}
 			domain = Main.getConfig().getSrvRecordPrefix() + domain;
@@ -45,7 +50,10 @@ public class LookupThread implements Runnable {
 				result = address.getHostAddress() + ":" + srvRecord.getPort();
 			}
 			sock.getOutputStream().write(result.getBytes());
-			LOGGER.log(Level.FINE, "Resolve " + domain + " to " + result);
+			if (LOGGER.isLoggable(Level.FINE)) {
+				LOGGER.log(Level.FINE, "Resolve " + domain + " to " + result
+						+ " for " + sock.getInetAddress().getHostAddress());
+			}
 		} catch (TextParseException e) {
 			LOGGER.log(Level.WARNING, "Can't lookup domain.", e);
 		} catch (SocketTimeoutException e) {

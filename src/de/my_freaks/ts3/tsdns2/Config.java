@@ -67,11 +67,11 @@ public class Config {
 		return defaultHost;
 	}
 
-	public List<String> getAllowedDomains() {
-		return allowedDomains;
-	}
-
 	public boolean isDomainAllowed(String domain) {
+		if (allowedDomains.isEmpty()) {
+			return true;
+		}
+
 		for (String curDomain : allowedDomains) {
 			if (domain.endsWith(curDomain)) {
 				return true;

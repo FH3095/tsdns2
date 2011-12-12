@@ -69,8 +69,10 @@ public class Main {
 				}
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Error.", e);
+			throw new RuntimeException("Error.", e);
 		}
+
 		LOGGER.log(Level.INFO, "Shutdown.");
 		threadPool.shutdown();
 		try {
@@ -81,6 +83,7 @@ public class Main {
 		LOGGER.log(Level.WARNING, "Exit now.");
 		threadPool.shutdownNow();
 	}
+
 	public static Random getRandom() {
 		return rand;
 	}
