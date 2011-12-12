@@ -34,7 +34,8 @@ public class Config {
 				.parseLong((String) props.getProperty("ShutdownWaitTime")));
 		serverPort = Integer.parseInt(props.getProperty("ServerPort"));
 		threads = Short.parseShort(props.getProperty("Threads"));
-		socketTimeout = Integer.parseInt(props.getProperty("SocketTimeout"));
+		socketTimeout = (int) TimeUnit.SECONDS.toMillis(Integer.parseInt(props
+				.getProperty("SocketTimeout")));
 		srvRecordPrefix = props.getProperty("SrvRecordPrefix");
 		defaultHost = props.getProperty("DefaultHost");
 		allowedDomains = Arrays.asList(props.getProperty("AllowedDomains")
