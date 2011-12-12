@@ -33,9 +33,10 @@ public class LookupThread implements Runnable {
 			String domain = new String(inData).trim();
 			if (!Main.getConfig().isDomainAllowed(domain)) {
 				if (LOGGER.isLoggable(Level.FINE)) {
-					LOGGER.log(Level.FINE, sock.getInetAddress()
-							.getHostAddress()
-							+ " tried to lookup not allowed domain: " + domain);
+					LOGGER.log(Level.FINE,
+							"Tried to lookup not allowed domain " + domain
+									+ " for "
+									+ sock.getInetAddress().getHostAddress());
 				}
 				return;
 			}
