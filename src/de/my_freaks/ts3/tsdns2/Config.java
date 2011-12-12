@@ -24,7 +24,7 @@ public class Config {
 		props = new Properties();
 		try {
 			BufferedInputStream propsFile = new BufferedInputStream(
-					new FileInputStream("ts3dns2.properties"));
+					new FileInputStream("tsdns2.properties"));
 			props.load(propsFile);
 			propsFile.close();
 		} catch (IOException e) {
