@@ -12,6 +12,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+import org.xbill.DNS.DClass;
+import org.xbill.DNS.Lookup;
+
 public class Main {
 	private ExecutorService threadPool;
 	private ThreadFactory threadFactory;
@@ -25,7 +28,12 @@ public class Main {
 	public static void main(String[] args) {
 		config = new Config();
 		initLogger();
-		new Main().run();
+		try {
+			new Main().run();
+		} catch (Throwable t) {
+			LOGGER.log(Level.SEVERE, "Exception in Main:", t);
+			throw new RuntimeException("Excpeption in Main", t);
+		}
 	}
 
 	private void init() throws IOException {
@@ -48,6 +56,12 @@ public class Main {
 			init();
 			LOGGER.log(Level.INFO, "Initialized.");
 			while (!serverSock.isClosed()) {
+
+				if (LOGGER.isLoggable(Level.FINER)) {
+					LOGGER.log(Level.FINER, "Cache status: IN-Entries="
+							+ Lookup.getDefaultCache(DClass.IN).getSize());
+				}
+
 				Socket sock;
 				if (!DEBUG) {
 					sock = serverSock.accept();

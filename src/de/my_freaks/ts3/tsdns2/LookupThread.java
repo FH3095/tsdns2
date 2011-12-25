@@ -21,8 +21,7 @@ public class LookupThread implements Runnable {
 	private final static Logger LOGGER = Logger.getLogger(LookupThread.class
 			.getCanonicalName());
 
-	@Override
-	public void run() {
+	private void doAnswer() {
 		try {
 			sock.setSoTimeout(Main.getConfig().getSocketTimeout());
 			byte[] inData = new byte[100];
@@ -67,6 +66,16 @@ public class LookupThread implements Runnable {
 			} catch (IOException e) {
 				// Ignore
 			}
+		}
+	}
+
+	@Override
+	public void run() {
+		try {
+			doAnswer();
+		} catch (Throwable t) {
+			LOGGER.log(Level.SEVERE, "Exception in LookupThread:", t);
+			throw new RuntimeException("Exception in LookupThread", t);
 		}
 	}
 
