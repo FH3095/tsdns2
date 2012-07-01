@@ -91,8 +91,8 @@ public class LookupThread implements Runnable {
 			if (record.getPriority() < lowestPriority) {
 				lowestPriority = record.getPriority();
 				chosenRecords.clear();
-			}
-			if (record.getPriority() == lowestPriority) {
+				chosenRecords.add(record);
+			} else if (record.getPriority() == lowestPriority) {
 				chosenRecords.add(record);
 			}
 		}
