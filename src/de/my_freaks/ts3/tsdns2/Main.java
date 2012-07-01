@@ -23,6 +23,7 @@ public class Main {
 	private static Random rand = new Random(System.nanoTime());
 	private static Logger LOGGER = Logger.getLogger(Main.class
 			.getCanonicalName());
+	// If true, emulate Socket-Input and Output via Console.
 	public static final boolean DEBUG = false;
 
 	public static void main(String[] args) {
